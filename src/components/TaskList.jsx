@@ -2,7 +2,7 @@
 // `favourites` is client state, so it stays in useState.
 
 import { useQuery } from '@tanstack/react-query'
-import ProductCard from './TaskRow.jsx'
+import TodoCard from './TaskRow.jsx'
 
 const PUBLIC_API_URL = 'https://jsonplaceholder.typicode.com/todos'
 
@@ -20,24 +20,23 @@ function TodoList() {
     queryKey: ['todos'],
     queryFn: fetchTodos,
     staleTime: 60_000,
-    retry: false, // fail fast so the error state shows at once (default is 3 retries)
+    retry: false,
   })
 
-  if (isLoading) return <p>Loading products...</p>
+  if (isLoading) return <p>Loading tasks...</p>
   if (isError) {
-    return <p role="alert">Something went wrong loading products. Please try again.</p>
+    return <p role="alert">Something went wrong loading tasks. Please try again.</p>
   }
-  if (todos.length === 0) return <p>No products yet.</p>
+  if (todos.length === 0) return <p>No tasks yet.</p>
 
   return (
-    <section className="product-list">
-      <div className="product-list__grid">
-        {todos.map((product) => (
-          <ProductCard
-            key={product.id}
-            {...product}
-          // isFavourite={favourites.includes(product.id)}
-          // onToggleFavourite={toggleFavourite}
+    <section>
+      <h3>Task Category</h3>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-5">
+        {todos.map((todo) => (
+          <TodoCard
+            key={todo.id}
+            {...todo}
           />
         ))}
       </div>
