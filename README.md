@@ -12,6 +12,24 @@ A to-do list dashboard built with React. Browse tasks on a dashboard, filter the
 
 The API has no categories, so each category is a group of API user IDs, set in `src/components/Categories.jsx`.
 
+### Public API
+
+[JSONPlaceholder](https://jsonplaceholder.typicode.com/), a free fake REST API. No API key is needed.
+
+- `GET https://jsonplaceholder.typicode.com/todos`: all 200 tasks, used on the Dashboard.
+- `GET https://jsonplaceholder.typicode.com/todos/:id`: one task, used on the Task detail page.
+
+### TanStack Query
+
+All API data is fetched with TanStack Query's `useQuery`, not with `useState` and `useEffect`.
+
+- **Dashboard** (`TaskList.jsx`) uses the query key `['tasks']` to fetch every task.
+- **Task detail** (`TaskDetail.jsx`) uses the query key `['task', id]`, so each task id gets its own cache entry.
+- Data stays fresh for 60 seconds (`staleTime: 60_000`), so going back to a page you just visited shows the cached data without fetching again.
+- Failed requests are not retried (`retry: false`), so the error message appears right away.
+
+The loading, error, and empty states come from what `useQuery` returns: `isLoading` shows the loading message, `isError` shows the error message, and the empty message is shown when there is no data to display.
+
 ### Loading, error, and empty states
 
 - **Loading:** shown while tasks or a single task are being fetched.
@@ -32,11 +50,17 @@ The API has no categories, so each category is a group of API user IDs, set in `
 Requires Node.js 20.19 or newer (needed by Vite 8).
 
 ```bash
+git clone https://github.com/rochellegarcia/AIM-mini-project-1.git
+cd AIM-mini-project-1
 npm install
 npm run dev
 ```
 
 Open the local address Vite prints in the terminal (usually `http://localhost:5173`).
+
+## Live demo
+
+https://aim-mini-project-1.vercel.app/
 
 ## Other scripts
 
