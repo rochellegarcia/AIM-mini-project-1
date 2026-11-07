@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 
 const user = {
     name: 'Hedy Lamarr',
@@ -19,7 +17,7 @@ function Profile() {
                     height: user.imageSize
                 }}
             />
-            <h1 className="text-center text-lg"><strong>Hi, {user.name}! Welcome to your Task Dashboard</strong></h1>
+            <p className="text-center text-lg"><strong>Hi, {user.name}! Welcome to your Task Dashboard</strong></p>
 
         </>
     )

@@ -9,7 +9,7 @@ async function fetchTasks() {
   return response.json()
 }
 
-function TaskList() {
+function TaskList({ category, search }) {
   const { data: tasks = [], isLoading, isError } = useQuery({
     queryKey: ['tasks'],
     queryFn: fetchTasks,
@@ -21,11 +21,26 @@ function TaskList() {
   if (isError) {
     return <p role="alert">Something went wrong loading tasks. Please try again.</p>
   }
-  if (tasks.length === 0) return <p>No tasks yet.</p>
+
+  const visibleTasks = category
+    ? tasks.filter((task) => category.userIds.includes(task.userId))
+    : tasks
+
+  const searchedTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(search.toLowerCase())
+  )
+
+  const shownTasks = search ? searchedTasks : visibleTasks
+
+  const sortedTasks = category
+    ? shownTasks.toSorted((a, b) => a.completed - b.completed)
+    : shownTasks
+
+  if (shownTasks.length === 0) return <p>No tasks found.</p>
 
   return (
     <>
-      {tasks.map((task) => (
+      {sortedTasks.map((task) => (
         <TaskRow key={task.id} {...task} />
       ))}
     </>

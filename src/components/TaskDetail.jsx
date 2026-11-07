@@ -1,5 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
+import { categories } from './Categories.jsx'
+
 
 // Returns the task, or null when the API has no task with this id.
 async function fetchTask(id) {
@@ -20,7 +22,7 @@ function TaskDetail() {
   })
 
   return (
-    <main className="mx-auto max-w-240 px-4 pt-8 pb-12 sm:px-5">
+    <main className="mx-auto max-w-320 px-4 pt-8 pb-12 sm:px-5">
       <Link className="text-blue-600 underline hover:text-blue-800" to="/">Back to tasks</Link>
       {isLoading && <p className="mt-4">Loading task...</p>}
       {isError && (
@@ -28,9 +30,9 @@ function TaskDetail() {
       )}
       {isSuccess && !task && <p className="mt-4">Task not found.</p>}
       {task && (
-        <article className="mt-4 flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-4">
+        <article className="mt-4 flex flex-col gap-2 rounded-xl border border-gray-300 bg-white p-4">
           <h1 className="text-2xl font-bold sm:text-3xl">{task.title}</h1>
-          <p>User: {task.userId}</p>
+          <p>Category: {categories.find((c) => c.userIds.includes(task.userId))?.name}</p>
           <p className={task.completed ? 'text-green-700' : 'text-red-600'}>
             Status: {task.completed ? 'Completed' : 'Not completed'}
           </p>
