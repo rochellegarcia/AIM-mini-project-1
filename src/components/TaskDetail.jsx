@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import { categories } from './Categories.jsx'
+import Profile from './Profile.jsx'
 
 
 // Returns the task, or null when the API has no task with this id.
@@ -22,22 +23,37 @@ function TaskDetail() {
   })
 
   return (
-    <main className="mx-auto max-w-320 px-4 pt-8 pb-12 sm:px-5">
-      <Link className="text-blue-600 underline hover:text-blue-800" to="/">Back to tasks</Link>
-      {isLoading && <p className="mt-4">Loading task...</p>}
-      {isError && (
-        <p role="alert" className="mt-4">Something went wrong loading this task. Please try again.</p>
-      )}
-      {isSuccess && !task && <p className="mt-4">Task not found.</p>}
-      {task && (
-        <article className="mt-4 flex flex-col gap-2 rounded-xl border border-gray-300 bg-white p-4">
-          <h1 className="text-2xl font-bold sm:text-3xl">{task.title}</h1>
-          <p>Category: {categories.find((c) => c.userIds.includes(task.userId))?.name}</p>
-          <p className={task.completed ? 'text-green-700' : 'text-red-600'}>
-            Status: {task.completed ? 'Completed' : 'Not completed'}
-          </p>
-        </article>
-      )}
+    <main className="mx-auto max-w-320 px-5 pt-8 pb-12">
+      <header className="mb-6">
+        <h1 className="mb-1 text-2xl font-bold sm:text-3xl">Personal Task Dashboard</h1>
+      </header>
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] items-start gap-2">
+        <section className="self-start mt-4 gap-2 rounded-xl border border-gray-300 bg-white p-4">
+          <nav className="grid grid-cols-1 gap-2">
+            <Profile />
+            <Link className="text-center hover:text-blue-800 rounded-xl border border-gray-300 bg-white p-4" to="/">Home</Link>
+            <Link className="text-center hover:text-blue-800 rounded-xl border border-gray-300 bg-white p-4" to="/about">About</Link>
+          </nav>
+        </section>
+
+        <div className="self-start mt-4 gap-2 px-6 rounded-xl border border-gray-300 bg-white p-4">
+          <Link className="text-blue-600 underline hover:text-blue-800" to="/">Back to tasks</Link>
+          {isLoading && <p className="mt-4">Loading task...</p>}
+          {isError && (
+            <p role="alert" className="mt-4">Something went wrong loading this task. Please try again.</p>
+          )}
+          {isSuccess && !task && <p className="mt-4">Task not found.</p>}
+          {task && (
+            <div className="mt-4 flex flex-col gap-2">
+              <h2 className="text-2xl font-bold sm:text-3xl">{task.title}</h2>
+              <p>Category: {categories.find((c) => c.userIds.includes(task.userId))?.name}</p>
+              <p className={task.completed ? 'text-green-700' : 'text-red-600'}>
+                Status: {task.completed ? 'Completed' : 'Not completed'}
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
     </main>
   )
 }
