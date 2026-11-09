@@ -14,9 +14,10 @@ function About() {
         <h2 className="mb-2 text-xl font-semibold">What this app does</h2>
         <ul className="list-disc list-inside space-y-1 text-base">
           <li>Shows all your tasks on one dashboard, with each task's title, category, and status</li>
+          <li>Shows a task overview with the total, done, and open task counts</li>
           <li>Filters tasks by category (Work, Personal, or House Chores), with open tasks listed first</li>
-          <li>Searches all tasks by title</li>
-          <li>Lets you open a task that is not completed on its own detail page</li>
+          <li>Searches tasks by title within the selected category, or across all tasks when All is selected</li>
+          <li>Lets you open a task on its own detail page</li>
           <li>Uses routing so each page has its own web address</li>
           <li>Has an About page (this one) that explains the project</li>
         </ul>
