@@ -13,6 +13,12 @@ A to-do list dashboard built with React. Browse tasks on a dashboard, filter the
 
 The API has no categories, so each category is a group of API user IDs, set in `src/components/Categories.jsx`.
 
+### Screenshots
+
+![Dashboard](screenshots/dashboard-overview.png)
+![Task detail](screenshots/task-detail.png)
+![About page](screenshots/about.png)
+
 ### Public API
 
 [JSONPlaceholder](https://jsonplaceholder.typicode.com/), a free fake REST API. No API key is needed.
@@ -70,12 +76,6 @@ npm run build    # production build into dist/
 npm run preview  # preview the production build
 npm run lint     # run ESLint
 ```
-
-## Screenshots
-
-![Dashboard](screenshots/dashboard-overview.png)
-![Task detail](screenshots/task-detail.png)
-![About page](screenshots/about.png)
 
 ## Project structure
 
