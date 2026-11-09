@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import TaskList from './TaskList.jsx'
+import TaskOverview from './TaskOverview.jsx'
 import Profile from './Profile.jsx'
 import { categories } from './Categories.jsx'
 import { useState } from 'react';
@@ -36,7 +37,7 @@ function TaskPage() {
               <>
                 <button
                   className={`text-center hover:text-blue-800 ${selectedCategory === null ? 'font-semibold text-blue-800' : ''}`}
-                  onClick={() => setSelectedCategory(null)}
+                  onClick={() => { setSelectedCategory(null); setSearch('') }}
                 >
                   All
                 </button>
@@ -44,7 +45,7 @@ function TaskPage() {
                   <button
                     key={category.id}
                     className={`text-center hover:text-blue-800 ${selectedCategory?.id === category.id ? 'font-semibold text-blue-800' : ''}`}
-                    onClick={() => setSelectedCategory(category)}
+                    onClick={() => { setSelectedCategory(category); setSearch('') }}
                   >
                     {category.name}
                   </button>
@@ -56,6 +57,7 @@ function TaskPage() {
         </section>
 
         <section className=" self-start mt-4 flex flex-col gap-2 rounded-xl border border-gray-300 bg-white p-4">
+          <TaskOverview />
           <h2>{search ? 'Search results' : selectedCategory ? selectedCategory.name : 'All tasks'}</h2>
           <input
             type="search"
@@ -65,7 +67,7 @@ function TaskPage() {
             className="w-full rounded-xl border border-gray-200 p-2"
           />
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5">
             <TaskList category={selectedCategory} search={search} />
 
           </div>

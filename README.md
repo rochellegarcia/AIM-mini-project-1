@@ -5,8 +5,9 @@ A to-do list dashboard built with React. Browse tasks on a dashboard, filter the
 ## Features
 
 - **Dashboard** (`/`): lists tasks fetched from the [JSONPlaceholder](https://jsonplaceholder.typicode.com/todos) API. Each card shows the task's title, category, and status.
-  - **Categories:** open the Categories menu and pick Work, Personal, or House Chores to see only that category's tasks, with open tasks listed first. Pick **All** to see every task again.
-  - **Search:** type in the search bar to find tasks by title across all categories.
+  - **Task Overview:** three cards above the task list show the Total, Done, and Open task counts. They are calculated from the same data as the task list, so they update together.
+  - **Categories:** open the Categories menu and pick Work, Personal, or House Chores to see only that category's tasks, with open tasks listed first. Pick **All** to see every task again. Picking a category clears the search bar.
+  - **Search:** type in the search bar to find tasks by title. The search stays within the selected category, or covers all tasks when **All** is selected. Typing in the search bar does not change the selected category.
 - **Task detail** (`/tasks/:id`): shows one task's title, category, and status based on the `id` in the URL. Open it with the **Open Task** link on any task that is not completed.
 - **About** (`/about`): describes the app and its builder.
 
@@ -72,7 +73,7 @@ npm run lint     # run ESLint
 
 ## Screenshots
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard-overview.png)
 ![Task detail](screenshots/task-detail.png)
 ![About page](screenshots/about.png)
 
@@ -85,7 +86,8 @@ src/
   index.css                  # Tailwind CSS import
   components/
     TaskPage.jsx             # dashboard layout, categories menu, search bar
-    TaskList.jsx             # fetches tasks, then filters, searches, and sorts them
+    TaskOverview.jsx         # Total, Done, and Open task count cards
+    TaskList.jsx             # fetches tasks (exports fetchTasks), then filters, searches, and sorts them
     TaskRow.jsx              # one task card
     TaskDetail.jsx           # single task page (/tasks/:id)
     About.jsx                # about page

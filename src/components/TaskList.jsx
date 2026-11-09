@@ -3,7 +3,7 @@ import TaskRow from './TaskRow.jsx'
 
 const PUBLIC_API_URL = 'https://jsonplaceholder.typicode.com/todos'
 
-async function fetchTasks() {
+export async function fetchTasks() {
   const response = await fetch(PUBLIC_API_URL)
   if (!response.ok) throw new Error(`API responded ${response.status}`)
   return response.json()
@@ -26,7 +26,7 @@ function TaskList({ category, search }) {
     ? tasks.filter((task) => category.userIds.includes(task.userId))
     : tasks
 
-  const searchedTasks = tasks.filter((task) =>
+  const searchedTasks = visibleTasks.filter((task) =>
     task.title.toLowerCase().includes(search.toLowerCase())
   )
 
